@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../../styles/mediaQuery';
 import UIButton from './index';
 
 const StyledUIButton = styled(UIButton)`
@@ -9,8 +10,8 @@ const StyledUIButton = styled(UIButton)`
   font-weight: 600;
   position: relative;
   text-transform: uppercase;
-  border-radius: ${(props) => props.theme.borderRadius};
-  background: ${(props) => props.theme.colors.getGradient()};
+  border-radius: ${props => props.theme.borderRadius};
+  background: ${props => props.theme.colors.getGradient()};
 `;
 
 export default StyledUIButton;
