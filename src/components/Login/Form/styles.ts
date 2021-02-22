@@ -69,6 +69,12 @@ export const Button = styled(StyledUIButton)`
     max-width: unset;
     box-shadow: 0px 10px 25px #cf99db;
   `}
+  * {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 `;
 
 export const ForgotPassword = styled.button`
