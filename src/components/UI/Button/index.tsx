@@ -1,10 +1,11 @@
-import Ink from 'react-ink';
+/* eslint-disable react/button-has-type */
+import * as React from 'react';
 
 interface UIButtonProps {
   text: string;
   className?: string;
+  onClick?: () => void;
   type?: 'button' | 'submit';
-  onClick?: React.ChangeEvent<HTMLInputElement>;
 }
 
 export default function UIButton({
@@ -14,9 +15,17 @@ export default function UIButton({
   className,
 }: UIButtonProps): JSX.Element {
   return (
-    <button className={className} type={type} onClick={onClick}>
-      {text}
-      <Ink />
+    <button
+      type={type}
+      data-testid="button"
+      className={className}
+      onClick={() => {
+        if (onClick) {
+          onClick();
+        }
+      }}
+    >
+      <span data-testid="button-span">{text}</span>
     </button>
   );
 }

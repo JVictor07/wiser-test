@@ -11,7 +11,7 @@ export const LoginForm = styled.div`
   flex-direction: column;
   justify-content: center;
   ${media.medium`
-    background: ${(props) => props.theme.colors.offWhitePurple};
+    background: ${props => props.theme.colors.offWhitePurple};
   `}
 `;
 
@@ -21,8 +21,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   padding: 25px 27px 0 27px;
   width: calc(100vw - 66px);
-  border-radius: ${(props) => props.theme.borderRadius};
-  background: ${(props) => props.theme.colors.offWhitePurple};
+  border-radius: ${props => props.theme.borderRadius};
+  background: ${props => props.theme.colors.offWhitePurple};
 
   ${media.medium`
     padding: 0;
@@ -46,45 +46,19 @@ export const Title = styled.h1`
   `}
 `;
 
-export const Description = styled.h1`
+export const Description = styled.span`
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
   text-align: center;
   margin-bottom: 20px;
-  color: ${(props) => props.theme.colors.lightPurple};
+  color: ${props => props.theme.colors.lightPurple};
   ${media.medium`
     font-size: 16px;
     max-width: 222px;
     text-align: start;
     line-height: 20px;
   `}
-`;
-
-export const UIInput = styled.div`
-  width: 100%;
-  :not(:last-of-type) {
-    margin-bottom: 15px;
-  }
-  label {
-    display: flex;
-    flex-direction: column;
-    span {
-      font-size: 10px;
-      margin-left: 10px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    input {
-      height: 48px;
-      font-size: 10px;
-      padding: 0 15px;
-      color: ${props => props.theme.colors.lightPurple};
-      border-radius: ${props => props.theme.borderRadius};
-      background: ${props => props.theme.colors.offWhitePurple};
-      border: 1px solid ${props => props.theme.colors.lightPurple};
-    }
-  }
 `;
 
 export const Button = styled(StyledUIButton)`

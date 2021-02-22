@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck (necessary because the Styled Components has a bug in the @media)
 import { css } from 'styled-components';
 
 export const breakpoint = {

@@ -1,10 +1,13 @@
+import * as React from 'react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { instanceLoginAPI } from '../../../api';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as S from './styles';
+import UIInput from '../../UI/Input';
+import * as UserActions from '../../../store/ducks/user/actions';
 
 interface IFormInputs {
   email: string;
@@ -16,41 +19,14 @@ const formSchema = yup.object().shape({
   password: yup.string().required(),
 });
 
-export default function LoginForm(): JSX.Element {
-  const [formErrorMsg, setFormErrorMsg] = useState('');
+function LoginForm({ loadRequestLogin }): JSX.Element {
   const { handleSubmit, errors, register } = useForm<IFormInputs>({
     resolver: yupResolver(formSchema),
   });
 
   const onSubmit = (data: IFormInputs) => {
-    instanceLoginAPI
-      .login(data)
-      .then(resp => {
-        if (resp.status === 200) {
-          setFormErrorMsg('');
-          handleLogin(resp.data);
-        } else {
-          throw resp;
-        }
-      })
-      .catch(err => {
-        if (err.response) {
-          if (err.response.status === 401) {
-            setFormErrorMsg('Usuário não autorizado');
-          } else {
-            setFormErrorMsg(err.message);
-          }
-        } else {
-          setFormErrorMsg(err.message);
-        }
-      });
+    loadRequestLogin(data);
   };
-
-  useEffect(() => {
-    console.log('errors');
-    console.log(errors);
-  }, [errors]);
-
   return (
     <S.LoginForm>
       <S.FormContainer onSubmit={handleSubmit(onSubmit)}>
@@ -58,19 +34,22 @@ export default function LoginForm(): JSX.Element {
         <S.Description>
           Para acessar a plataforma, faça seu login.
         </S.Description>
-        <S.UIInput>
-          <label htmlFor="email">
-            <span>E-mail</span>
-            <input type="text" name="email" id="email" ref={register} />
-            <span />
-          </label>
-        </S.UIInput>
-        <S.UIInput>
-          <label htmlFor="email">
-            <span>Senha</span>
-            <input type="password" name="password" ref={register} />
-          </label>
-        </S.UIInput>
+
+        <UIInput
+          type="text"
+          name="email"
+          label="E-mail"
+          errors={errors}
+          register={register}
+        />
+
+        <UIInput
+          label="Senha"
+          name="password"
+          errors={errors}
+          type="password"
+          register={register}
+        />
 
         <S.Button type="submit" text="Entrar" />
       </S.FormContainer>
@@ -83,3 +62,8 @@ export default function LoginForm(): JSX.Element {
     </S.LoginForm>
   );
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(UserActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(LoginForm);

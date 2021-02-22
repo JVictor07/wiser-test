@@ -8,7 +8,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font: 400 16px 'Montserrat', sans-serif;
-    color: ${(props) => props.theme.colors.darkPurple};
+    color: ${props => props.theme.colors.darkPurple};
     &::-webkit-scrollbar {
         width: 0.5em;
         border-radius: 5px;
@@ -21,7 +21,7 @@ export default createGlobalStyle`
 
       &::-webkit-scrollbar-thumb {
         border-radius: 5px;
-        background-color: ${(props) => props.theme.colors.darkPurple};
+        background-color: ${props => props.theme.colors.darkPurple};
       }
 
     input {

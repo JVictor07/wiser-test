@@ -1,4 +1,15 @@
 const withImages = require('next-images')
-module.exports = withImages({
+const withTypescript = require('@zeit/next-typescript')
+
+module.exports = withTypescript(withImages({
   esModule: true,
-})
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: false,
+      },
+    ];
+  },
+}))
